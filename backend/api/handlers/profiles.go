@@ -23,7 +23,6 @@ func CheckProfileExists(profiles ProfileFinder) gin.HandlerFunc {
 		ctx := c.Request.Context()
 		email := c.Param("email")
 
-		fmt.Println("Checking email:", email)
 		exists, err := profiles.CheckProfileExists(ctx, email)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})

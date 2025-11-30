@@ -23,6 +23,7 @@ func NewApplication() *Application {
 
 	profiles := data.NewProfileRepository(db)
 	perfumes := data.NewPerfumeRepository(db)
+	cabinets := data.NewCabinetRepository(db)
 
 
 
@@ -31,6 +32,7 @@ func NewApplication() *Application {
 		DB:         db,
 		Profiles:   profiles,
 		Perfumes: perfumes,
+		Cabinets:   cabinets,
 	}
 }
 

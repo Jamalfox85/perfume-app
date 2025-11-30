@@ -11,6 +11,7 @@ import (
 
 
 type Perfume struct {
+	Id				string     			`json:"id"`
 	HouseId   		*string   			`json:"house_id"`
 	Name      		string   			`json:"name"`
 	Year	  		*int      			`json:"year"`

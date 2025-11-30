@@ -1,4 +1,5 @@
 import api from "../services/apiClient";
+import { useProfiles } from "./useProfiles";
 
 export function usePerfumes() {
     const getPerfume = async (id) => {

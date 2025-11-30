@@ -33,6 +33,9 @@ func (app *Application) Routes() http.Handler {
     {
 		// Profile Routes
         protected.GET("/profile/:id", handlers.GetProfile(app.Profiles))
+
+		// Cabinet Routes
+		protected.GET("/cabinet/:userId", handlers.GetProfileCabinet(app.Cabinets))
     }
 
     return router

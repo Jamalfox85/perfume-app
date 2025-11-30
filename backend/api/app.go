@@ -10,4 +10,5 @@ type Application struct {
 	DB 	  		*pgxpool.Pool
 	Perfumes 	*data.PerfumeRepository
 	Profiles    *data.ProfileRepository
+	Cabinets    *data.CabinetRepository
 }

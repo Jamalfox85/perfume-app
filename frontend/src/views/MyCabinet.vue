@@ -3,13 +3,13 @@
         <n-tab-pane name="shelf" tab="My Shelf">
             <ShelfTab :perfumes="perfumes" />
         </n-tab-pane>
-        <n-tab-pane name="layering" tab="Layering">
+        <n-tab-pane name="layering" tab="My Layering Sets">
             <LayeringTab :layeringSets="layeringSets" />
         </n-tab-pane>
-        <n-tab-pane name="collections" tab="Collections">
+        <n-tab-pane name="collections" tab="My Collections">
             <CollectionsTab :collections="collections" />
         </n-tab-pane>
-        <n-tab-pane name="wishlist" tab="Wishlist">
+        <n-tab-pane name="wishlist" tab="My Wishlist">
             <WishlistTab :wishlist="wishlist" />
         </n-tab-pane>
     </n-tabs>

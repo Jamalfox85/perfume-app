@@ -21,15 +21,17 @@ func (app *Application) Routes() http.Handler {
             c.JSON(http.StatusOK, gin.H{"message": "Service is running!"})
         })
 
+		// Profile Routes
         public.GET("/profile/check-email/:email", handlers.CheckProfileExists(app.Profiles))
 
-        // If perfumes should be browsable without logging in, leave this public
+		// Perfume Routes
+		public.GET("/perfumes", handlers.GetPerfumes(app.Perfumes))
     }
 	
     protected := router.Group("/")
     protected.Use(middleware.AuthMiddleware())
     {
-		protected.GET("/perfumes", handlers.GetPerfumes(app.Perfumes))
+		// Profile Routes
         protected.GET("/profile/:id", handlers.GetProfile(app.Profiles))
     }
 

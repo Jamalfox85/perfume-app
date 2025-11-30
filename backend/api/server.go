@@ -3,7 +3,6 @@ package api
 import (
 	"fmt"
 	"log"
-	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -22,17 +21,6 @@ func (s *Server) Start(app *Application) {
 
 	router := gin.Default()
 	router.Use(CORSMiddleware())
-
-	// Test Route
-	router.GET("/health", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"message": "Service is running!"})
-	})
-
-	// Messages Routes
-	// router.GET("/messages", handlers.GetMessages(app.Messages))
-
-	// Customer Routes
-	// router.POST("/customers", handlers.PostCustomers(app.Customers))
 
 	// Start the server
 	fmt.Println("Server Running on", s.listenAddr);

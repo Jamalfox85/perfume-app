@@ -1,0 +1,12 @@
+version: "3"
+
+tasks:
+    init:
+        desc: "Initialize Go module and download dependencies"
+        cmds:
+            - go mod tidy
+
+    run:
+        desc: "Run the project"
+        cmds:
+            - go run *.go

@@ -6,7 +6,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/pgxpool"
+	"github.com/jamalfox85/perfume-app/backend/data"
 	"github.com/joho/godotenv" // Import the godotenv package
 )
 
@@ -18,35 +19,38 @@ func NewApplication() *Application {
 	}
 
 	// Create DB Instance and table repositories
-	db := newDB()
-	defer db.Close(context.Background())
+	db := newDBPool()
 
-	// messages := data.NewMessageRepository(db)
-	// customers := data.NewCustomerRepository(db)
+	profiles := data.NewProfileRepository(db)
+	perfumes := data.NewPerfumeRepository(db)
+
+
 
 
 	return &Application{
-		// Messages: messages,
-		// Customers: customers,
+		DB:         db,
+		Profiles:   profiles,
+		Perfumes: perfumes,
 	}
 }
 
-func newDB() *pgx.Conn {
+func newDBPool() *pgxpool.Pool {
 	ctx := context.Background()
-	db, err := pgx.Connect(ctx, os.Getenv("DB_CONNECTION_STRING"))
-	if err != nil {
-		log.Fatalf("Failed to connect to the database: %v", err)
-	}
-	defer db.Close(ctx)
+	dbURL := os.Getenv("DB_CONNECTION_STRING")
 
-	// Example query to test connection
+	pool, err := pgxpool.New(ctx, dbURL)
+	if err != nil {
+		log.Fatalf("Failed to create DB pool: %v", err)
+	}
+
+	// Test the connection
 	var name string
-    err = db.QueryRow(ctx, "SELECT name FROM perfumes LIMIT 1").Scan(&name)
-    if err != nil {
-        log.Fatalf("Query failed: %v\n", err)
-    }
+	err = pool.QueryRow(ctx, "SELECT name FROM perfumes LIMIT 1").Scan(&name)
+	if err != nil {
+		log.Fatalf("Query failed: %v\n", err)
+	}
 	fmt.Println("First perfume name:", name)
 
 	fmt.Println("Connected to the database successfully")
-	return db;
+	return pool
 }
